@@ -1,0 +1,18 @@
+.wrapper-registration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.regist-form {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+.regist-form input {
+    max-width: 25vw;
+}
+.regist-btn {
+    margin-top: 2rem;
+    padding: 0.25rem 1rem;
+    cursor: pointer;
+}

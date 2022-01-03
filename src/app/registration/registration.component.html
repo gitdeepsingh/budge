@@ -1,0 +1,18 @@
+<div class="wrapper-registration">
+    <h1>REGISTRATION</h1>
+    <form class="regist-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <label for="firtname">First Name: </label>
+        <input type="text" id="firtname" formControlName="firstName" />
+
+        <label for="lasname">Last Name: </label>
+        <input type="text" id="lastname" formControlName="lastName" />
+
+        <label for="email">Email: </label>
+        <input type="email" id="email" formControlName="email" />
+
+        <label for="passphrase">Password: </label>
+        <input type="password" id="passphrase" formControlName="passphrase" />
+        
+        <button class="regist-btn" type="submit" [disabled]="!registerForm.valid">REGISTER</button>
+    </form>
+</div>
