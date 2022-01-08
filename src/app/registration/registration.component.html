@@ -1,17 +1,39 @@
 <div class="wrapper-registration">
     <h1>REGISTRATION</h1>
     <form class="regist-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <label for="firtname">First Name: </label>
-        <input type="text" id="firtname" formControlName="firstName" />
+        <label for="firstname">First Name: </label>
+        <input type="text" id="firstname" autocomplete="off" formControlName="firstName" />
+        <div class="errors-wrapper" [hidden]="firstName.valid || firstName.untouched">
+            <div class="error-validations" [hidden]="!firstName.hasError('required')">
+                First Name is required.
+            </div>
+            <div class="error-validations" [hidden]="!firstName.hasError('minlength')">
+                First Name must be 3 characters long.
+            </div>
+        </div>
 
         <label for="lasname">Last Name: </label>
         <input type="text" id="lastname" formControlName="lastName" />
 
         <label for="email">Email: </label>
-        <input type="email" id="email" formControlName="email" />
+        <input type="email" id="email" autocomplete="off" formControlName="email" />
+        <div class="errors-wrapper" [hidden]="email.valid || email.untouched">
+            <div class="error-validations" [hidden]="!email.hasError('required')">
+                Email is required.
+            </div>
+        </div>
 
         <label for="passphrase">Password: </label>
-        <input type="password" id="passphrase" formControlName="passphrase" />
+        <input type="password" id="passphrase" autocomplete="off" formControlName="passphrase" />
+        <div class="errors-wrapper" [hidden]="passphrase.valid || passphrase.untouched">
+            <div class="error-validations" [hidden]="!passphrase.hasError('required')">
+                Password is required.
+            </div>
+            <div class="error-validations" [hidden]="!passphrase.hasError('minlength')">
+                Password must be 6 characters long.
+            </div>
+        </div>
+
         
         <button class="regist-btn" type="submit" [disabled]="!registerForm.valid">REGISTER</button>
     </form>

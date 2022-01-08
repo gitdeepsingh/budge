@@ -8,11 +8,44 @@
     flex-direction: column;
     align-items: baseline;
 }
+.regist-form label {
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+.regist-form input {
+    padding: 0.25rem 0.5rem;
+    background-color : #f3fbf9; 
+    border: none;
+    border-radius: 0.25rem;
+    outline: none;
+}
 .regist-form input {
     max-width: 25vw;
 }
 .regist-btn {
     margin-top: 2rem;
-    padding: 0.25rem 1rem;
     cursor: pointer;
+    outline: none;
+    background: transparent;
+    border-width: 1px;
+    padding: 0.5rem 0;
+    width: 100%;
+}
+.regist-btn:disabled {
+    pointer-events: none;
+}
+.regist-btn:hover, regist-btn:focus, regist-btn:active {
+    background: #30ddb2;
+    border: none;
+    border-color: #30ddb2;
+    color: #fff;
+    font-weight: bold;
+}
+.error-validations {
+    color: #e71717;;
+    font-size: 0.75rem;
+    padding: 0 0 0.25rem 0;
+}
+.errors-wrapper {
+    width: 90%;
 }
