@@ -11,11 +11,7 @@ const port = process.env.PORT || 3001;
 app.use(corsMiddleware);
 app.use(bodyParser.json());
 
-// routes
-app.post('/registration', (req, res) => {
 
-    res.json(req.body);
-});
 
 
 // server start
@@ -24,9 +20,15 @@ app.listen(port, async () => {
     try {
         await db.connect();
         console.log('Successfully connected to DB');
-        db.query('SELECT NOW()', (err, res) => {
-            if (err) console.log('c err=', err);
-            else console.log('c res=', res);
+        db.query('SELECT NOW()', (dbErr, dbRes) => {
+            if (dbErr) console.log('c err=', dbErr);
+            else {
+                console.log('c res=', dbRes.rows);
+                // routes
+                app.post('/registration', (req, res) => {
+                    res.json(dbRes.rows);
+                });
+            }
             db.end()
         })
     } catch (e) {
@@ -36,8 +38,8 @@ app.listen(port, async () => {
     }
 });
 
-process.on('uncaughtException', () => {
-    console.log('UncaughtException occurred! Exiting now...')
+process.on('uncaughtException', (excp) => {
+    console.log(`UncaughtException occurred! Exception="${excp} || ${JSON.stringify(excp)}" Exiting now...`)
     process.exit();
 })
 
