@@ -1,7 +1,7 @@
 <div class="wrapper-registration">
     <h1>REGISTRATION</h1>
     <form class="regist-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <label for="firstname">First Name: </label>
+        <label for="firstname">First Name </label>
         <input type="text" id="firstname" autocomplete="off" formControlName="firstName" />
         <div class="errors-wrapper" [hidden]="firstName.valid || firstName.untouched">
             <div class="error-validations" [hidden]="!firstName.hasError('required')">
@@ -12,10 +12,10 @@
             </div>
         </div>
 
-        <label for="lasname">Last Name: </label>
+        <label for="lasname">Last Name </label>
         <input type="text" id="lastname" autocomplete="off" formControlName="lastName" />
 
-        <label for="email">Email: </label>
+        <label for="email">Email </label>
         <input type="email" id="email" autocomplete="off" formControlName="email" />
         <div class="errors-wrapper" [hidden]="email.valid || email.untouched">
             <div class="error-validations" [hidden]="!email.hasError('required')">
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <label for="passphrase">Password: </label>
+        <label for="passphrase">Password </label>
         <input type="password" id="passphrase" autocomplete="off" formControlName="passphrase" />
         <div class="errors-wrapper" [hidden]="passphrase.valid || passphrase.untouched">
             <div class="error-validations" [hidden]="!passphrase.hasError('required')">

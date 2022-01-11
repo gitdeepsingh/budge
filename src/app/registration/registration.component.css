@@ -7,6 +7,8 @@
     display: flex;
     flex-direction: column;
     align-items: baseline;
+    box-shadow: 0 0 5px #333;
+    padding: 5rem;
 }
 .regist-form label {
     margin-top: 0.75rem;
@@ -15,7 +17,8 @@
 .regist-form input {
     padding: 0.25rem 0.5rem;
     background-color : #f3fbf9; 
-    border: 1px solid;;
+    box-shadow: 0 0 2px #333;
+    border: none;
     border-radius: 0.25rem;
     outline: none;
 }
@@ -23,7 +26,7 @@
     max-width: 25vw;
 }
 .regist-btn {
-    margin-top: 2rem;
+    margin-top: 4rem;
     cursor: pointer;
     outline: none;
     background: transparent;
