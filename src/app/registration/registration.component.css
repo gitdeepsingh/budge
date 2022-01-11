@@ -1,42 +1,55 @@
 .wrapper-registration {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
 }
+
 .regist-form {
     display: flex;
     flex-direction: column;
     align-items: baseline;
-    box-shadow: 0 0 5px #333;
-    padding: 5rem;
+    box-shadow: 0 0 10px #000;
+    padding: 3rem 5rem 5rem 5rem;
+    opacity: 0.9;
+    background: black;
+    color: #fff;
 }
+
 .regist-form label {
     margin-top: 0.75rem;
     margin-bottom: 0.25rem;
 }
+
 .regist-form input {
     padding: 0.25rem 0.5rem;
-    background-color : #f3fbf9; 
+    background-color: #f3fbf9;
     box-shadow: 0 0 2px #333;
     border: none;
     border-radius: 0.25rem;
     outline: none;
 }
+
 .regist-form input {
     max-width: 25vw;
 }
+
 .regist-btn {
     margin-top: 4rem;
     cursor: pointer;
     outline: none;
-    background: transparent;
+    background: #2a3632;
     border-width: 1px;
     padding: 0.5rem 0;
     width: 100%;
+    color: #fff;
 }
+
 .regist-btn:disabled {
     pointer-events: none;
 }
+
 .regist-btn:hover, regist-btn:focus, regist-btn:active {
     box-shadow: 0px 0px 2px #333;
     background: #30ddb2;
@@ -45,11 +58,14 @@
     color: #fff;
     font-weight: bold;
 }
+
 .error-validations {
-    color: #e71717;;
+    color: #e71717;
+    ;
     font-size: 0.75rem;
     padding: 0 0 0.25rem 0;
 }
+
 .errors-wrapper {
     width: 90%;
 }

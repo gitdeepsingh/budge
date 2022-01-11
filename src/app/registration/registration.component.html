@@ -1,6 +1,6 @@
 <div class="wrapper-registration">
-    <h1>REGISTRATION</h1>
     <form class="regist-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h1>REGISTRATION</h1>
         <label for="firstname">First Name </label>
         <input type="text" id="firstname" autocomplete="off" formControlName="firstName" />
         <div class="errors-wrapper" [hidden]="firstName.valid || firstName.untouched">
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        
+
         <button class="regist-btn" type="submit" [disabled]="!registerForm.valid">REGISTER</button>
     </form>
 </div>
