@@ -15,7 +15,7 @@
 .regist-form input {
     padding: 0.25rem 0.5rem;
     background-color : #f3fbf9; 
-    border: none;
+    border: 1px solid;;
     border-radius: 0.25rem;
     outline: none;
 }
