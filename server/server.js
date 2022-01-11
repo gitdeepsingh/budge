@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -10,6 +11,8 @@ const allowCrossDomain = function (req, res, next) {
     next();
 }
 app.use(allowCrossDomain);
+
+app.use(bodyParser.json());
 
 app.post('/registration', (req, res) => {
     res.json(req.body);
