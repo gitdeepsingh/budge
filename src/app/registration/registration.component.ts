@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit {
   onSubmit(): void {
     console.log('===', this.registerForm.value)
     this.http.registerUser(this.registerForm.value).subscribe((d) => console.log('ddd=>', d))
-    this.registerForm.reset();
+    // this.registerForm.reset();
   }
 
 }
