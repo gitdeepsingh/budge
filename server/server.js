@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
 
 const corsMiddleware = require('./middlewares/corsHelper');
 const db = require('./db');
@@ -13,23 +14,38 @@ app.use(bodyParser.json());
 
 
 // routes
-app.post('/registration', (req, res) => {
+app.post('/registration', async (req, res) => {
     const { firstName, lastName, email, passphrase } = req.body;
-    const text = 'INSERT INTO users(firstname, lastname, email, passcode) VALUES($1, $2, $3, $4) RETURNING *'
-    const values = [firstName, lastName, email, passphrase];
-    db.query(text, values, (dbErr, dbRes) => {
-        if (dbErr) {
-            if (dbErr.code === '23505' && dbErr.constraint === 'firstkey') {
-                console.log('Error while querying at registration. Reason="User email already exists!"');
-                res.status(400).send({ error: 'Invalid email' });
-            } else {
-                console.log('Error while querying at registration. Reason=', dbErr);
-                res.status(500).send({ error: 'DB querying failed!!' });
-            }
-        }
-        else {
-            res.send(true);
-        }
+    const userInfo = { firstName, lastName, email, passphrase };
+
+
+    // encrypt passphrase
+    await bcrypt.genSalt(10, function (err, salt) {
+        bcrypt.hash(passphrase, salt, function (err, hash) {
+            console.log("🚀 ~ file: server.js ~ line 26 ~ hash", hash)
+            userInfo.passphrase = hash;
+            console.log('userInfo: ', userInfo);
+            const text = 'INSERT INTO users(firstname, lastname, email, passcode) VALUES($1, $2, $3, $4) RETURNING *'
+            const values = [...Object.values(userInfo)];
+            db.query(text, values, (dbErr, dbRes) => {
+                if (dbErr) {
+                    if (dbErr.code === '23505' && dbErr.constraint === 'firstkey') {
+                        const errorToThrow = {
+                            message: 'invalid email',
+                            code: 'firstkey'
+                        }
+                        console.log('Error while querying at registration. Reason="User email already exists!"');
+                        res.status(400).send(errorToThrow);
+                    } else {
+                        console.log('Error while querying at registration. Reason=', dbErr);
+                        res.status(500).send({ error: 'DB querying failed!!' });
+                    }
+                }
+                else {
+                    res.send(true);
+                }
+            });
+        });
     });
 });
 
