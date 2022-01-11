@@ -11,8 +11,8 @@ const allowCrossDomain = function (req, res, next) {
 }
 app.use(allowCrossDomain);
 
-app.get('/server', (req, res) => {
-    res.send('from server')
+app.post('/registration', (req, res) => {
+    res.json(req.body);
 });
 
 app.listen(port, () => {
