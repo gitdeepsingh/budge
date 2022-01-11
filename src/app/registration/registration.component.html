@@ -16,10 +16,13 @@
         <input type="text" id="lastname" autocomplete="off" formControlName="lastName" />
 
         <label for="email">Email </label>
-        <input type="email" id="email" autocomplete="off" formControlName="email" />
+        <input type="email" id="email" email autocomplete="off" formControlName="email" />
         <div class="errors-wrapper" [hidden]="email.valid || email.untouched">
             <div class="error-validations" [hidden]="!email.hasError('required')">
                 Email is required.
+            </div>
+            <div class="error-validations" [hidden]="!email.hasError('email')">
+                Please provide a valid email.
             </div>
         </div>
 
