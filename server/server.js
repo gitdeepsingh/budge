@@ -11,13 +11,24 @@ const port = process.env.PORT || 3001;
 app.use(corsMiddleware);
 app.use(bodyParser.json());
 
+
 // routes
 app.post('/registration', (req, res) => {
-    db.query('SELECT NOW()', (dbErr, dbRes) => {
-        if (dbErr) console.log('c err=', dbErr);
+    const { firstName, lastName, email, passphrase } = req.body;
+    const text = 'INSERT INTO users(firstname, lastname, email, passcode) VALUES($1, $2, $3, $4) RETURNING *'
+    const values = [firstName, lastName, email, passphrase];
+    db.query(text, values, (dbErr, dbRes) => {
+        if (dbErr) {
+            if (dbErr.code === '23505' && dbErr.constraint === 'firstkey') {
+                console.log('Error while querying at registration. Reason="User email already exists!"');
+                res.status(400).send({ error: 'Invalid email' });
+            } else {
+                console.log('Error while querying at registration. Reason=', dbErr);
+                res.status(500).send({ error: 'DB querying failed!!' });
+            }
+        }
         else {
-            console.log('c res=', dbRes.rows);
-            res.json(dbRes.rows);
+            res.send(true);
         }
     });
 });
