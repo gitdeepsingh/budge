@@ -3,26 +3,21 @@ import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { HttpService } from './../config/config.service';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
   providers: [HttpService]
 })
 @Injectable()
-export class RegistrationComponent implements OnInit {
-
+export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private http: HttpService) { }
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
-  firstName = new FormControl('', [Validators.required, Validators.minLength(3)]);
-  lastName = new FormControl('');
   email = new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]);
   passphrase = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
-  public registerForm = this.fb.group({
-    firstName: this.firstName,
-    lastName: this.lastName,
+  public loginForm = this.fb.group({
     email: this.email,
     passphrase: this.passphrase
   });
@@ -31,9 +26,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('===', this.registerForm.value)
-    this.http.registerUser(this.registerForm.value).subscribe((d) => console.log('ddd=>', d))
-    // this.registerForm.reset();
+    console.log('===', this.loginForm.value)
+    this.http.login(this.loginForm.value).subscribe((d) => console.log('ddd=>', d))
+    // this.loginForm.reset();
   }
 
 }

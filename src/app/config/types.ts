@@ -4,3 +4,8 @@ export interface Register {
     lastName: String,
     passphrase: String
 }
+
+export interface Login {
+    email: String,
+    passphrase: String
+}

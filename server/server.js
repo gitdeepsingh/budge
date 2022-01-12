@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 const corsMiddleware = require('./middlewares/corsHelper');
 const db = require('./db');
@@ -11,6 +13,23 @@ const port = process.env.PORT || 3001;
 // middlewares 
 app.use(corsMiddleware);
 app.use(bodyParser.json());
+
+function configureSecurity() {
+    passport.use(new LocalStrategy(
+        function (username, password, done) {
+            User.findOne({ username: username }, function (err, user) {
+                if (err) { return done(err); }
+                if (!user) {
+                    return done(null, false, { message: 'Incorrect username.' });
+                }
+                if (!user.validPassword(password)) {
+                    return done(null, false, { message: 'Incorrect password.' });
+                }
+                return done(null, user);
+            });
+        }
+    ));
+}
 
 
 // routes
@@ -35,7 +54,7 @@ app.post('/registration', async (req, res) => {
                             code: 'firstkey'
                         }
                         console.log('Error while querying at registration. Reason="User email already exists!"');
-                        res.status(400).send(errorToThrow);
+                        res.status(400).send({ error: errorToThrow });
                     } else {
                         console.log('Error while querying at registration. Reason=', dbErr);
                         res.status(500).send({ error: 'DB querying failed!!' });
@@ -48,6 +67,36 @@ app.post('/registration', async (req, res) => {
         });
     });
 });
+app.post('/login', (req, res) => {
+    // test: deeptest4@test.com, 444444
+    const { email, passphrase } = req?.body;
+    const query = {
+        text: 'SELECT * FROM users WHERE email= $1',
+        values: [email],
+    }
+    const errorToThrow = {
+        message: 'invalid credentials',
+        status: 401
+    }
+
+    db.query(query, (dbErr, dbRes) => {
+        if (dbErr) {
+            res.status(500).send({ error: { message: 'DB querying failed!!' } })
+        } else if (dbRes?.rows?.length) {
+            const pw = dbRes?.rows[0].passcode;
+            if (pw) {
+                bcrypt.compare(passphrase, pw).then((isMatch) => {
+                    if (isMatch) res.json(true)
+                    else {
+                        res.status(401).send({ error: errorToThrow });
+                    }
+                });
+            }
+        } else {
+            res.status(401).send({ error: errorToThrow });
+        }
+    });
+})
 
 
 
@@ -55,6 +104,7 @@ app.post('/registration', async (req, res) => {
 app.listen(port, async () => {
     console.log(`Server is up at port ${port}`);
     try {
+        configureSecurity();
         await db.connect();
         console.log('Successfully connected to DB');
     } catch (e) {
