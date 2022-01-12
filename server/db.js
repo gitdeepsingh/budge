@@ -1,14 +1,5 @@
-const { Pool, Client } = require('pg');
-const connectionString = 'postgresql://postgres:******@localhost:5432/budge';
-
-const pool = new Pool({
-    connectionString,
-})
-pool.query('SELECT NOW()', (err, res) => {
-    if (err) console.log('Error while querying pool. Reason=', err);
-    else { }
-    pool.end();
-});
+const { Client } = require('pg');
+const connectionString = 'postgresql://postgres:******7@localhost:5432/budge';
 const client = new Client({
     connectionString,
 });
