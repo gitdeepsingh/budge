@@ -28,5 +28,9 @@
             <button class="login-btn" type="submit" [disabled]="!loginForm.valid">LOGIN</button>
             <div class="gotoregister">Not registred with us? <a routerLink="/register">Get registered here</a></div>
         </form>
+        <div *ngIf="isLoading" class="progress-spinner">
+            <mat-spinner color="accent"></mat-spinner>
+        </div>
+
     </div>
 </div>

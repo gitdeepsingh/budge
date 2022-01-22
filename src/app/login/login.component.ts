@@ -23,11 +23,14 @@ export class LoginComponent implements OnInit {
     passphrase: this.passphrase
   });
 
+  isLoading = false;
+
   ngOnInit(): void {
     this.isUserLoggedIn.emit(true);
   }
 
   onSubmit(): void {
+    this.isLoading = true;
     this.http.login(this.loginForm.value).subscribe((res) => {
       if (res) {
         this.isUserLoggedIn.emit(res);
@@ -35,6 +38,7 @@ export class LoginComponent implements OnInit {
       } else {
         console.log('Not valid!')
       }
+      this.isLoading = false;
     })
     // this.loginForm.reset();
   }

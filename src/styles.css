@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .login-registration-background {
     background-image: url('assets/images/Background_banner.webp');
@@ -7,5 +9,11 @@
     width: 100%;
     height: 95vh;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.progress-spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-4rem, 0);
+    padding: 10px;
+}
+
