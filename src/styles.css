@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
-body {
+.login-registration-background {
     background-image: url('assets/images/Background_banner.webp');
     background-position: center;
     background-size: 100%;
+    width: 100%;
+    height: 95vh;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

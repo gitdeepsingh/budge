@@ -1,7 +1,7 @@
 .wrapper-registration {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 45%;
+    top: 40%;
     transform: translate(-10rem, -15rem);
     padding: 10px;
 }
@@ -29,6 +29,7 @@
     border: none;
     border-radius: 0.25rem;
     outline: none;
+    width: 95%;
 }
 
 .regist-form input {
@@ -61,11 +62,14 @@
 
 .error-validations {
     color: #e71717;
-    ;
     font-size: 0.75rem;
     padding: 0 0 0.25rem 0;
 }
 
 .errors-wrapper {
     width: 90%;
+}
+
+.gotologin {
+    margin-top: 1rem;
 }
