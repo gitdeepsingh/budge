@@ -31,16 +31,20 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.isLoading = true;
-    this.http.login(this.loginForm.value).subscribe((res) => {
-      if (res) {
-        this.isUserLoggedIn.emit(res);
-        this.router.navigateByUrl('dashboard');
-      } else {
-        console.log('Not valid!')
-      }
+    this.http.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        if (res) { // handle success
+          this.isUserLoggedIn.emit(res);
+          this.router.navigateByUrl('dashboard');
+        } else {
+          console.log('Not valid!'); // handle error
+        }
+      },
+      error: (err) => { // handle errors
+        console.log('err: ', err);
+      },
+    }).add((e: void) => { // finally
       this.isLoading = false;
-    })
-    // this.loginForm.reset();
+    });
   }
-
 }

@@ -9,19 +9,8 @@ export class HttpService {
     constructor(private http: HttpClient) { }
     private baseUrl = 'http://localhost:3001';
 
-    private handleError(error: HttpErrorResponse) {
-        if (error.status === 0) {
-            // A client-side or network error occurred. Handle it accordingly.
-            console.error('An error occurred:', error.error);
-        } else {
-            // The backend returned an unsuccessful response code.
-            // The response body may contain clues as to what went wrong.
-            console.error(
-                `Backend returned code ${error.status}, body was: `, error.error);
-        }
-        // Return an observable with a user-facing error message.
-        return throwError(
-            'Something bad happened; please try again later.');
+    private handleError(err: HttpErrorResponse) {
+        return throwError({ message: err?.error?.error?.message || 'INTERNAL_SERVER_ERROR', status: err?.status || 500 });
     }
 
     registerUser(data: Register): Observable<Register> {
