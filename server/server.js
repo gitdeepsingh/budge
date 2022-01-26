@@ -37,46 +37,10 @@ class BudgeApp {
         const db = DB.getDb();
         try {
             const _router = new BudgeRouter(db);
-            this.app.use('', [_router.router]);
+            this.app.use('/', [_router.router]);
         } catch (err) {
-            console.log('err: >>>', err);
-
+            console.log('startRouter err: >>>', err);
         }
-        // routes
-        this.app.post('/registration', async (req, res) => {
-            const { firstName, lastName, email, passphrase } = req.body;
-            const userInfo = { firstName, lastName, email, passphrase };
-
-
-            // encrypt passphrase
-            await bcrypt.genSalt(10, function (err, salt) {
-                bcrypt.hash(passphrase, salt, function (err, hash) {
-                    console.log("🚀 ~ file: server.js ~ line 26 ~ hash", hash)
-                    userInfo.passphrase = hash;
-                    console.log('userInfo: ', userInfo);
-                    const text = 'INSERT INTO users(firstname, lastname, email, passcode) VALUES($1, $2, $3, $4) RETURNING *'
-                    const values = [...Object.values(userInfo)];
-                    db.query(text, values, (dbErr, dbRes) => {
-                        if (dbErr) {
-                            if (dbErr.code === '23505' && dbErr.constraint === 'firstkey') {
-                                const errorToThrow = {
-                                    message: 'invalid email',
-                                    code: 'firstkey'
-                                }
-                                console.log('Error while querying at registration. Reason="User email already exists!"');
-                                res.status(400).send({ error: errorToThrow });
-                            } else {
-                                console.log('Error while querying at registration. Reason=', dbErr);
-                                res.status(500).send({ error: 'DB querying failed!!' });
-                            }
-                        }
-                        else {
-                            res.send(true);
-                        }
-                    });
-                });
-            });
-        });
     }
 
     startServer() {
@@ -91,7 +55,7 @@ class BudgeApp {
             } catch (e) {
                 console.log('Error setting-up the routes. Reason=', e, JSON.stringify(e));
                 console.log(' Exiting now...');
-                db.end();
+                // db.end();
                 process.exit();
             }
         });
@@ -116,6 +80,7 @@ class BudgeApp {
 const budgeApp = new BudgeApp();
 
 process.on('uncaughtException', (excp) => {
+    console.log('excp: ', excp);
     console.log(`UncaughtException occurred! Exception="${excp} || ${JSON.stringify(excp)}" Exiting now...`)
     budgeApp.stopApp
 })

@@ -30,8 +30,10 @@ class BudgeRouter extends BaseRouter {
     userRegister(req, res) {
         const _service = new UserRegisterService(req, this.db)
         _service.register().then(data => {
+            console.log('data: >>>>', data);
             if (data) res.json({ status: 'OK' });
         }).catch(error => {
+            console.log('error:>>> ', error);
             res.status(error?.statusCode || 500).send({ error });
         })
     }
