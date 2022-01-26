@@ -13,6 +13,7 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private http: HttpService) { }
 
+  isLoading = false;
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
   firstName = new FormControl('', [Validators.required, Validators.minLength(3)]);
@@ -31,9 +32,16 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('===', this.registerForm.value)
-    this.http.registerUser(this.registerForm.value).subscribe((d) => console.log('ddd=>', d))
-    // this.registerForm.reset();
+    this.isLoading = true;
+    this.http.registerUser(this.registerForm.value).subscribe({
+      next: (res) => {
+        console.log('ddd=>', res)
+      },
+      error: (err) => { // handle errors
+        console.log('err: ', err);
+      },
+    }).add((e: void) => { // finally
+      this.isLoading = false;
+    });
   }
-
 }
