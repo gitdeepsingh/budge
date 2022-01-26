@@ -12,14 +12,27 @@ class BudgeRouter extends BaseRouter {
             path: '/login',
             handler: this.userLogin.bind(this)
         })
+        this.postHandlers.push({
+            path: '/registration',
+            handler: this.userRegister.bind(this)
+        })
     }
 
     userLogin(req, res) {
         const _service = new UserLoginService(req, this.db)
         _service.login().then(data => {
-            res.json({ status: 'OK' });
+            if (data) res.json({ status: 'OK' });
         }).catch(error => {
-            res.status(error?.error?.statusCode || 500).send({ error });
+            res.status(error?.statusCode || 500).send({ error });
+        })
+    }
+
+    userRegister(req, res) {
+        const _service = new UserRegisterService(req, this.db)
+        _service.register().then(data => {
+            if (data) res.json({ status: 'OK' });
+        }).catch(error => {
+            res.status(error?.statusCode || 500).send({ error });
         })
     }
 }

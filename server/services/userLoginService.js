@@ -23,24 +23,22 @@ class UserLoginService extends BaseService {
         return new Promise((resolve, reject) => {
             this.db.query(query, (dbErr, dbRes) => {
                 if (dbErr) {
-                    return reject({ error: {statusCode: 500, message: 'DB querying failed!!' } })
+                    errorToThrow.message = 'DB querying failed!!';
+                    errorToThrow.statusCode = 500;
+                    return reject({ ...errorToThrow })
                 } else if (dbRes?.rows?.length) {
                     const pw = dbRes?.rows[0].passcode;
                     if (pw) {
-                        bcrypt.compare(passphrase, pw)
-                        .then((res) => {
-                            if (res) return resolve(res)
-                            else {
-                                return reject({ error: errorToThrow });
-                            }
-                        });
+                        return bcrypt.compare(passphrase, pw)
+                            .then((res) => {
+                                if (res) resolve(res)
+                                else reject({ ...errorToThrow });
+                            });
                     }
-                } else {
-                    return reject({ error: errorToThrow });
-                }
+                } else return reject({ ...errorToThrow });
             });
         })
-         
+
     }
 }
 
