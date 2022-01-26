@@ -6,17 +6,13 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const corsMiddleware = require('./middlewares/corsHelper');
 const DB = require('./db');
-
-
+const BudgeRouter = require('./routes/route-config/budgeRouter');
 
 class BudgeApp {
     constructor() {
-
         this.app = express();
         this.port = process.env.PORT || 3001;
     }
-    // middlewares 
-
 
     configureSecurity() {
         this.app.use(corsMiddleware);
@@ -39,6 +35,13 @@ class BudgeApp {
 
     startRouter() {
         const db = DB.getDb();
+        try {
+            const _router = new BudgeRouter(db);
+            this.app.use('', [_router.router]);
+        } catch (err) {
+            console.log('err: >>>', err);
+
+        }
         // routes
         this.app.post('/registration', async (req, res) => {
             const { firstName, lastName, email, passphrase } = req.body;
@@ -74,36 +77,6 @@ class BudgeApp {
                 });
             });
         });
-        this.app.post('/login', (req, res) => {
-            // test: deeptest4@test.com, 444444
-            const { email, passphrase } = req?.body;
-            const query = {
-                text: 'SELECT * FROM users WHERE email= $1',
-                values: [email],
-            }
-            const errorToThrow = {
-                message: 'invalid credentials',
-                status: 401
-            }
-
-            db.query(query, (dbErr, dbRes) => {
-                if (dbErr) {
-                    res.status(500).send({ error: { message: 'DB querying failed!!' } })
-                } else if (dbRes?.rows?.length) {
-                    const pw = dbRes?.rows[0].passcode;
-                    if (pw) {
-                        bcrypt.compare(passphrase, pw).then((isMatch) => {
-                            if (isMatch) res.json(true)
-                            else {
-                                res.status(401).send({ error: errorToThrow });
-                            }
-                        });
-                    }
-                } else {
-                    res.status(401).send({ error: errorToThrow });
-                }
-            });
-        })
     }
 
     startServer() {
