@@ -1,5 +1,5 @@
 const BaseRouter = require('./baseRouter');
-const { UserLoginService } = require('./../../services');
+const { UserLoginService, UserRegisterService } = require('./../../services');
 
 class BudgeRouter extends BaseRouter {
     constructor(db) {
