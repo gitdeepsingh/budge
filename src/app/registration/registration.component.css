@@ -51,7 +51,7 @@
     pointer-events: none;
 }
 
-.regist-btn:hover, regist-btn:focus, regist-btn:active {
+.regist-btn:hover, .regist-btn:focus, .regist-btn:active {
     box-shadow: 0px 0px 2px #333;
     background: #30ddb2;
     border: none;

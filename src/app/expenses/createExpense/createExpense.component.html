@@ -1,1 +1,32 @@
-<p>create expense!</p>
+<div class="create-expense-wrapper">
+    <div class="title">
+        <h1>CREATE AN EXPENSE</h1>
+    </div>
+    <form class="create-expense-form" [formGroup]="expenseCreateForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="form-field">
+            <mat-label>Expense Type</mat-label>
+            <mat-select class="expense-type" formControlName="expenseType">
+                <mat-option value="food">Food</mat-option>
+                <mat-option value="travel">Travel</mat-option>
+                <mat-option value="bills">Bills</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>Expense Amount</mat-label>
+            <input matInput type="number" class="expense-amount" placeholder="0" formControlName="expenseAmount">
+            <span matPrefix class="expense-amount">Rs.&nbsp;</span>
+            <span matSuffix class="expense-amount">.00</span>
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>Description</mat-label>
+            <textarea matInput class="expense-description" formControlName="expenseDesc"></textarea>
+          </mat-form-field>
+
+        <div class="create-expense-btn">
+            <button type="button" [disabled]="!expenseCreateForm.valid" (click)="onReset()">RESET</button>
+            <button type="submit" [disabled]="!expenseCreateForm.valid">CREATE</button>
+        </div>
+    </form>
+</div>
