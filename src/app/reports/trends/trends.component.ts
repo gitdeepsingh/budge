@@ -42,7 +42,7 @@ export class TrendsComponent implements OnInit {
       type: 'pie',
       data: [{
         name: 'Food',
-        y: 61.41,
+        y: 58.00,
         sliced: true,
         selected: true
       }, {
@@ -58,6 +58,10 @@ export class TrendsComponent implements OnInit {
         name: 'Shopping',
         y: 4.18
       }, {
+        name: 'Others',
+        y: 3.41
+      },
+      {
         name: 'Fun Activities',
         y: 1.64
       }]
