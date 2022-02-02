@@ -7,9 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { TrendsComponent } from './reports/trends/trends.component';
 
 const routes: Routes = [
-  // { path: '', component: HomeComponent, pathMatch:'full' },
+  { path: '', component: LoginComponent, pathMatch:'full' },
   { path: 'register', component: RegistrationComponent, pathMatch:'full' },
-  // { path: 'dashboard', component: HomeComponent, pathMatch:'full' },
+  { path: 'home', component: HomeComponent, pathMatch:'full' },
   { path: 'trends', component: TrendsComponent, pathMatch:'full' },
 ];
 

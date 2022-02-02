@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DownloadsComponent } from './reports/downloads/downloads.component';
 import { TrendsComponent } from './reports/trends/trends.component';
+import { AppMenuComponent } from './app-menu/app-menu.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { TrendsComponent } from './reports/trends/trends.component';
     HomeComponent,
     DownloadsComponent,
     TrendsComponent,
+    AppMenuComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +7,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private _router: Router) { }
+  constructor(private _router: Router) {
 
+  }
   title = 'budge';
+  isAuthApp = false;
 
   ngOnInit(): void {
+    this._router.events.subscribe(event => {
+      event instanceof NavigationEnd ? 
+      this.isAuthApp = event.url === '/' || event.url === '/register'
+      : null 
+    });
   }
-
 }

@@ -1,7 +1,4 @@
-<!-- <div class="registerlogin-app">
-    <app-login #loggedIn> </app-login>
-</div> -->
 <div id="budge-app">
-    <app-home></app-home>
+    <app-app-menu *ngIf="!isAuthApp"></app-app-menu>
     <router-outlet></router-outlet>
 </div>
