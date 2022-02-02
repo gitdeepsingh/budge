@@ -2,7 +2,7 @@
     <div class="title">
         <h1>CREATE AN EXPENSE</h1>
     </div>
-    <form class="create-expense-form" [formGroup]="expenseCreateForm" (ngSubmit)="onSubmit()">
+    <form class="create-expense-form" [formGroup]="expenseCreateForm" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm">
         <mat-form-field class="form-field">
             <mat-label>Expense Type</mat-label>
             <mat-select class="expense-type" formControlName="expenseType">
@@ -25,7 +25,7 @@
           </mat-form-field>
 
         <div class="create-expense-btn">
-            <button type="button" [disabled]="!expenseCreateForm.valid" (click)="onReset()">RESET</button>
+            <button type="button" (click)="onReset()">RESET</button>
             <button type="submit" [disabled]="!expenseCreateForm.valid">CREATE</button>
         </div>
     </form>

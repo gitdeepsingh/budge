@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroupDirective, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { HttpService } from './../../config/config.service';
 
 @Component({
@@ -26,12 +26,13 @@ export class CreateExpenseComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit():void {
-    console.log(' this.expenseCreateForm.value: ',  this.expenseCreateForm.value);
-    this.expenseCreateForm.reset();
+  onSubmit(formDirective: FormGroupDirective) {
+    console.log(' this.expenseCreateForm.value: ', this.expenseCreateForm.value);
+    this.expenseCreateForm.reset(); // reset ugly validators
+    formDirective.resetForm();
   }
 
-  onReset():void {
+  onReset(): void {
     this.expenseCreateForm.reset();
   }
 
