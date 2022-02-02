@@ -36,6 +36,7 @@ class BudgeApp {
     startRouter() {
         const db = DB.getDb();
         try {
+            //TODO: setup db query fetching in baseservice
             const _router = new BudgeRouter(db);
             this.app.use('/', [_router.router]);
         } catch (err) {
@@ -53,7 +54,7 @@ class BudgeApp {
                 // setting up routes
                 this.startRouter();
             } catch (e) {
-                console.log('Error setting-up the routes. Reason=', e, JSON.stringify(e));
+                console.log('Error startServer. Reason=', e, JSON.stringify(e));
                 console.log(' Exiting now...');
                 // db.end();
                 process.exit();

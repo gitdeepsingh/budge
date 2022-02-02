@@ -1,1 +1,29 @@
-<p>home works!</p>
+<div class="menu-wrapper">
+    <mat-toolbar>
+        <span>bUgDe</span>
+        <button class="menu-button" mat-button>HOME</button>
+
+        <button class="menu-button" mat-button [matMenuTriggerFor]="expenses">EXPENSES</button>
+        <mat-menu #expenses="matMenu">
+            <button mat-menu-item>Create Expense</button>
+            <button mat-menu-item>Manage Expenses</button>
+        </mat-menu>
+
+        <button class="menu-button" mat-button [matMenuTriggerFor]="reports">REPORTS</button>
+        <mat-menu #reports="matMenu">
+            <button mat-menu-item>Downloads</button>
+            <button mat-menu-item routerLink="/trends">Trends</button>
+        </mat-menu>
+
+        <div class="profile-icon">
+            <button class="menu-button" mat-button [matMenuTriggerFor]="profile">
+                <mat-icon matBadgeColor="warn">person</mat-icon>
+            </button>
+            <mat-menu #profile="matMenu">
+                <button mat-menu-item>My Profile</button>
+                <button mat-menu-item>Log Out</button>
+            </mat-menu>
+        </div>
+
+    </mat-toolbar>
+</div>

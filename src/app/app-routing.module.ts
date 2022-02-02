@@ -4,11 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
+import { TrendsComponent } from './reports/trends/trends.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch:'full' },
+  // { path: '', component: HomeComponent, pathMatch:'full' },
   { path: 'register', component: RegistrationComponent, pathMatch:'full' },
-  { path: 'dashboard', component: HomeComponent, pathMatch:'full' },
+  // { path: 'dashboard', component: HomeComponent, pathMatch:'full' },
+  { path: 'trends', component: TrendsComponent, pathMatch:'full' },
 ];
 
 @NgModule({
