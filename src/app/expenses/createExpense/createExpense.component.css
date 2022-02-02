@@ -16,6 +16,7 @@
 
 .create-expense-form .form-field {
     margin-bottom: 1rem;
+    width: 25vw;
 }
 
 .create-expense-btn button {
