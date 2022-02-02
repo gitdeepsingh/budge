@@ -24,14 +24,14 @@ export class LoginComponent implements OnInit {
 
   isLoading = false;
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   onSubmit(): void {
     this.isLoading = true;
     this.http.login(this.loginForm.value).subscribe({
       next: (res) => {
         if (res) { // handle success
+          window.sessionStorage.setItem('LOGGEDIN', 'OK')
           this.router.navigateByUrl('home');
         } else {
           console.log('Not valid!'); // handle error

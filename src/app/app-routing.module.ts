@@ -6,11 +6,13 @@ import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
 import { TrendsComponent } from './reports/trends/trends.component';
 
+import { AuthGuard } from './config/auth.service';
+
 const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch:'full' },
-  { path: 'register', component: RegistrationComponent, pathMatch:'full' },
-  { path: 'home', component: HomeComponent, pathMatch:'full' },
-  { path: 'trends', component: TrendsComponent, pathMatch:'full' },
+  { path: '', component: LoginComponent },
+  { path: 'register', component: RegistrationComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'trends', component: TrendsComponent, canActivate: [AuthGuard], },
 ];
 
 @NgModule({
