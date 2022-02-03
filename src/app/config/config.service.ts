@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { Register, Login } from './types';
+import { Register, Login, Profile } from './types';
 
 @Injectable()
 export class HttpService {
@@ -22,6 +22,13 @@ export class HttpService {
 
     login(data: Login): Observable<Login> {
         return this.http.post<Login>(`${this.baseUrl}/login`, data)
+            .pipe(
+                catchError(this.handleError)
+            )
+    }
+
+    getProfile(data: Profile): Observable<Profile> {
+        return this.http.get<Profile>(`${this.baseUrl}/profile/${data.userId}`)
             .pipe(
                 catchError(this.handleError)
             )

@@ -26,6 +26,23 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  fetchUserProfile(): void {
+    const payload={
+      userId: this.loginForm.value?.email
+    }
+    this.http.getProfile(payload).subscribe({
+      next: (res) => {
+        console.log('res: ', res);
+
+      },
+      error: (err) => {
+
+      }
+    }).add((e: void) => {
+
+    })
+  }
+
   onSubmit(): void {
     this.isLoading = true;
     this.http.login(this.loginForm.value).subscribe({
@@ -33,6 +50,7 @@ export class LoginComponent implements OnInit {
         if (res) { // handle success
           window.sessionStorage.setItem('LOGGEDIN', 'OK')
           this.router.navigateByUrl('home');
+          this.fetchUserProfile();
         } else {
           console.log('Not valid!'); // handle error
         }

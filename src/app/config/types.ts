@@ -9,3 +9,7 @@ export interface Login {
     email: String,
     passphrase: String
 }
+
+export interface Profile {
+    userId: String,
+}
