@@ -1,5 +1,5 @@
 const { Client } = require('pg');
-const connectionString = 'postgresql://postgres:XXXXXX@localhost:5432/budge';
+const connectionString = 'postgresql://postgres:Bang@707@localhost:5432/budge';
 
 let _db;
 

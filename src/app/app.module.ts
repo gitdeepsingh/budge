@@ -19,6 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { TrendsComponent } from './reports/trends/trends.component';
 import { DownloadsComponent } from './reports/downloads/downloads.component';
 import { CreateExpenseComponent } from './expenses/createExpense/createExpense.component';
+import { ProfileService } from './config/profile.service'
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { CreateExpenseComponent } from './expenses/createExpense/createExpense.c
     MaterialModule,
     HighchartsChartModule
   ],
-  providers: [],
+  providers: [ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
