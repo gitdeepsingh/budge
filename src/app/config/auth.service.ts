@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanDeactivate, CanActivate, Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -14,10 +14,10 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   canActivate(): boolean {
-      const isAuth = window.sessionStorage.getItem('LOGGEDIN') === 'OK';
+    const isAuth = window.sessionStorage.getItem('LOGGEDIN') === 'OK';
     if (!isAuth) {
       this.router.navigate(['']);
-      return false
+      return false;
     }
     return true;
   }

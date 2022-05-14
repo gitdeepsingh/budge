@@ -26,6 +26,7 @@
     "highcharts": "^9.3.3",
     "highcharts-angular": "^3.0.0",
     "mongoose": "^6.1.6",
+    "ngx-toastr": "^14.3.0",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
     "pg": "^8.7.1",

@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         next: (res) => {
           console.log('res: ', res);
           this.profileService.setProfile(res);
-          window.sessionStorage.setItem('LOGGEDIN', 'OK');
+          window.sessionStorage.setItem("userId", res?.email);
           this.router.navigateByUrl('home');
         },
         error: (err) => {},
@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
         next: (res) => {
           if (res) {
             // handle success
+            window.sessionStorage.setItem('LOGGEDIN', 'OK');
             this.fetchUserProfile();
           } else {
             console.log('Not valid!'); // handle error

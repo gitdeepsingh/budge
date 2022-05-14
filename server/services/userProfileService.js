@@ -9,7 +9,6 @@ class UserProfileService extends BaseService {
     }
 
     getProfile(userId) {
-        const { } = this.body; 
         const query = {
             text: 'SELECT * FROM users WHERE email= $1',
             values: [userId],

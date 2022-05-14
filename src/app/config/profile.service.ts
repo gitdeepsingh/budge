@@ -23,13 +23,12 @@ export class ProfileService {
   });
 
   getProfile() {
-    console.log('called GET');
-    console.log('assign(): ', assign());
+    console.log('this.profile.asObservable().pipe(assign()): ', this.profile.asObservable().pipe(assign()));
     return this.profile.asObservable().pipe(assign())
   }
-
+    
   setProfile(data: UserProfile) {
-    console.log('called SET setProfile: >>>>> ', data);
+    console.log('called SET setProfile:  >>>>> ', data);
     this.profile.next(data);
   }
 }

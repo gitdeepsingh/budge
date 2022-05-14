@@ -1,21 +1,26 @@
 export interface Register {
-  email: String;
-  firstName: String;
-  lastName: String;
-  passphrase: String;
+  email: string;
+  firstName: string;
+  lastName: string;
+  passphrase: string;
 }
 
 export interface Login {
-  email: String;
-  passphrase: String;
+  email: string;
+  passphrase: string;
 }
 
 export interface Profile {
-  email: String;
+  email: string;
 }
 
 export interface UserProfile {
   firstname: string ,
   lastname: string,
   email: string,
+}
+
+export interface Expense {
+  userId: string | null,
+  details: Object,
 }

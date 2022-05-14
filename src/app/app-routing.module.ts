@@ -6,6 +6,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
 import { TrendsComponent } from './reports/trends/trends.component';
 import { CreateExpenseComponent } from './expenses/createExpense/createExpense.component';
+import { ManageExpenseComponent } from './expenses/manageExpenses/manageExpense.component';
 
 import { AuthGuard } from './config/auth.service';
 
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'trends', component: TrendsComponent, canActivate: [AuthGuard], },
   { path: 'create', component: CreateExpenseComponent, canActivate: [AuthGuard], },
+  { path: 'manage', component: ManageExpenseComponent, canActivate: [AuthGuard], },
 ];
 
 @NgModule({

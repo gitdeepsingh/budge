@@ -1,18 +1,18 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { FormGroupDirective, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { HttpService } from './../../config/config.service';
+import { HttpService } from '../../config/config.service';
 import { UserProfile, Expense } from 'src/app/config/types';
-import { ProfileService } from './../../config/profile.service';
+import { ProfileService } from '../../config/profile.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-create-expense',
-  templateUrl: './createExpense.component.html',
-  styleUrls: ['./createExpense.component.css'],
+  selector: 'app-manage-expense',
+  templateUrl: './manageExpense.component.html',
+  styleUrls: ['./manageExpense.component.css'],
   providers: [HttpService, ProfileService, ToastrService]
 })
 @Injectable()
-export class CreateExpenseComponent implements OnInit {
+export class ManageExpenseComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private http: HttpService, private profileService: ProfileService, private toaster: ToastrService) { }
 

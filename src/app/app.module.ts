@@ -10,6 +10,7 @@ import {MaterialModule} from './app.material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -40,7 +41,12 @@ import { ProfileService } from './config/profile.service'
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [ProfileService],
   bootstrap: [AppComponent]
