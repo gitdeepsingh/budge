@@ -17,17 +17,11 @@ class CreateExpenseService extends BaseService {
   //     expenseAmount CHAR(50) NOT NULL,
   //     expenseDesc CHAR(500))
 
-  create() {
-    const { userId, details } = this.body;
+  getAllExpenses(userId) {
     console.log("this.body:>>>> ", this.body);
     const query = {
-      text: "INSERT INTO expenses(userId, expenseType, expenseAmount, expenseDesc) VALUES ($1, $2, $3, $4)",
-      values: [
-        userId,
-        details.expenseType,
-        details.expenseAmount.toString(),
-        details.expenseDesc,
-      ],
+      text: "SELECT * FROM expenses WHERE userId=$1",
+      values: [userId],
     };
     const errorToThrow = {
       message: "invalid credentials",
@@ -43,7 +37,7 @@ class CreateExpenseService extends BaseService {
           return reject({ ...errorToThrow });
         } else if (dbRes) {
           console.log("dbRes?.rows: ", dbRes?.rows);
-          resolve({ status: 'OK' });
+          resolve({ data: dbRes?.rows });
         } else return reject({ ...errorToThrow });
       });
     });

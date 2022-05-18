@@ -22,7 +22,7 @@ class CreateExpenseService extends BaseService {
     console.log("this.body:>>>> ", this.body);
     const query = {
       text: "INSERT INTO expenses(userId, expenseType, expenseAmount, expenseDesc) VALUES ($1, $2, $3, $4)",
-      values: [
+      values: [     
         userId,
         details.expenseType,
         details.expenseAmount.toString(),
@@ -43,7 +43,7 @@ class CreateExpenseService extends BaseService {
           return reject({ ...errorToThrow });
         } else if (dbRes) {
           console.log("dbRes?.rows: ", dbRes?.rows);
-          resolve({ status: 'OK' });
+          resolve({ status: "OK" });
         } else return reject({ ...errorToThrow });
       });
     });

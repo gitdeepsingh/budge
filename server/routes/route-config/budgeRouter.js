@@ -4,6 +4,7 @@ const {
   UserRegisterService,
   UserProfileService,
   CreateExpenseService,
+  ManageExpensesService,
 } = require("./../../services");
 
 class BudgeRouter extends BaseRouter {
@@ -29,6 +30,25 @@ class BudgeRouter extends BaseRouter {
       path: "/create-expense",
       handler: this.createExpense.bind(this),
     });
+    this.getHandlers.push({
+      path: "/expenses/:userId",
+      handler: this.getExpenses.bind(this),
+    });
+  }
+
+  getExpenses(req, res) {
+    const userId = req?.params?.userId || "";
+    const _service = new ManageExpensesService(req, this.db);
+    _service
+      .getAllExpenses(userId)
+      .then((data) => {
+        console.log("userProfile data: >>>>", data);
+        if (data) res.json(data);
+      })
+      .catch((error) => {
+        console.log("userProfile error:", error);
+        res.status(error?.statusCode || 500).send({ error });
+      });
   }
 
   userLogin(req, res) {

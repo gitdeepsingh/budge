@@ -15,12 +15,16 @@ export interface Profile {
 }
 
 export interface UserProfile {
-  firstname: string ,
-  lastname: string,
-  email: string,
+  firstname: string;
+  lastname: string;
+  email: string;
 }
 
 export interface Expense {
-  userId: string | null,
-  details: Object,
+  userId: string | null;
+  details: Object;
+}
+
+export interface ExpensesList {
+  data: any
 }
